@@ -123,9 +123,29 @@ failing source never breaks the others.
 
 ## Your confirmed preferences (baked in)
 
+- **Budget: CHF 3,500 preference, up to CHF 4,000 shown.** 3,500 is a *soft* ceiling, not
+  a hard cut — flats CHF 3,500–4,000 still appear, flagged "stretch" and ranked lower.
+  Only above CHF 4,000 are dropped. Tune `BUDGET_CHF` / `STRETCH_MAX_CHF` in `config.py`.
 - **Furnished & unfurnished both shown** — no furnishing filter.
 - **Move-in flexible / ASAP** — no availability-date cutoff; good matches surface as they appear.
 - **Delivery: email digest** — set the SMTP secrets below. The dashboard + `listings.json` are always written too.
+
+## Hiding false positives
+
+Portals occasionally return a mis-parsed or irrelevant listing. On the dashboard, hover any
+card and click the **✕** (top-right) to hide it. Use **Show hidden (N)** to review what you
+hid, **↩ restore** on any card to bring it back, or **Restore all** to clear them.
+
+Hidden listings are remembered **in your browser** (localStorage) and stay hidden across the
+daily rebuilds — so a false positive you dismiss won't keep reappearing each morning. Note
+this is per-device (it doesn't sync between your phone and laptop, and isn't reflected in the
+email digest).
+
+## Facebook groups (quick links, not scraped)
+
+The dashboard and every email include one-click links to your Geneva Facebook groups so you
+can skim them by hand. Edit the list in `config.py` (`FACEBOOK_GROUPS`). See below for why
+they're not automated.
 
 ## Facebook groups — deliberately *not* automated
 

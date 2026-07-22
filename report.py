@@ -34,18 +34,22 @@ def _card(l, is_new: bool) -> str:
   title = html.escape((l.title or l.url)[:140])
 
   return f'''
-  <a class="card{' is-new' if is_new else ''}" href="{html.escape(l.url)}" target="_blank" rel="noopener">
-    <div class="row1">
-      <span class="price">{price}</span>
-      <span class="pc">{pc}</span>
-    </div>
-    <div class="specs">{pieces} · {size}</div>
-    <div class="flags">{flags}</div>
-    <div class="title">{title}</div>
-    <div class="feats">{feats}</div>
-    {avail}
-    <div class="src" style="color:{color}">{l.source}</div>
-  </a>'''
+  <div class="card-wrap" data-uid="{l.uid}" data-rank="{l.area_rank}">
+    <button class="hidebtn" title="Hide this listing (false positive)" aria-label="Hide">✕</button>
+    <button class="restorebtn" title="Restore this listing">↩ restore</button>
+    <a class="card{' is-new' if is_new else ''}" href="{html.escape(l.url)}" target="_blank" rel="noopener">
+      <div class="row1">
+        <span class="price">{price}</span>
+        <span class="pc">{pc}</span>
+      </div>
+      <div class="specs">{pieces} · {size}</div>
+      <div class="flags">{flags}</div>
+      <div class="title">{title}</div>
+      <div class="feats">{feats}</div>
+      {avail}
+      <div class="src" style="color:{color}">{l.source}</div>
+    </a>
+  </div>'''
 
 
 def build_html(listings, new_uids: set) -> str:
@@ -68,6 +72,20 @@ def build_html(listings, new_uids: set) -> str:
       f'<div class="grid">{cards}</div>'
     )
   body = '\n'.join(sections) or '<p class="empty">No matching listings today. The watch will keep looking each morning.</p>'
+
+  # Facebook groups — manual check (we don't scrape them). Quick one-click links.
+  fb_html = ''
+  groups = getattr(config, 'FACEBOOK_GROUPS', {}) or {}
+  if groups:
+    links = ''.join(
+      f'<a href="{html.escape(u)}" target="_blank" rel="noopener">{html.escape(n)}</a>'
+      for n, u in groups.items())
+    fb_html = (
+      '<section class="fbgroups">'
+      '<h3>Facebook groups — check by hand</h3>'
+      '<p>Not scraped (their terms forbid it &amp; they need a login). '
+      'Open each in one click to skim for anything the portals miss:</p>'
+      f'{links}</section>')
 
   return f'''<!doctype html>
 <html lang="en"><head>
@@ -109,17 +127,102 @@ def build_html(listings, new_uids: set) -> str:
   .src {{ font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:.5px; margin-top:2px; }}
   .empty {{ color:var(--muted); }}
   footer {{ padding:22px; text-align:center; color:var(--muted); font-size:12px; }}
+  /* hide / restore */
+  .card-wrap {{ position:relative; }}
+  .hidebtn {{ position:absolute; top:8px; right:8px; z-index:2; width:24px; height:24px;
+             border:none; border-radius:50%; background:rgba(0,0,0,.06); color:#666;
+             font-size:12px; line-height:24px; cursor:pointer; padding:0; opacity:0;
+             transition:opacity .1s, background .1s; }}
+  .card-wrap:hover .hidebtn {{ opacity:1; }}
+  .hidebtn:hover {{ background:var(--accent); color:#fff; }}
+  .restorebtn {{ position:absolute; top:8px; right:8px; z-index:2; display:none;
+                border:1px solid var(--line); border-radius:20px; background:var(--card);
+                color:var(--ink); font-size:11px; font-weight:600; padding:3px 10px; cursor:pointer; }}
+  .card-wrap.is-hidden {{ display:none; }}
+  .card-wrap.reveal {{ display:block; opacity:.55; }}
+  .card-wrap.reveal .card {{ border-style:dashed; }}
+  .card-wrap.reveal .hidebtn {{ display:none; }}
+  .card-wrap.reveal .restorebtn {{ display:inline-block; }}
+  .controls {{ display:flex; gap:10px; align-items:center; flex-wrap:wrap; margin-top:12px; }}
+  .btn {{ font:inherit; font-size:13px; border:1px solid var(--line); background:var(--card);
+         color:var(--ink); border-radius:20px; padding:5px 14px; cursor:pointer; }}
+  .btn:hover {{ border-color:var(--accent); }}
+  .btn.active {{ background:var(--accent); color:#fff; border-color:var(--accent); }}
+  .btn[disabled] {{ opacity:.4; cursor:default; }}
+  .fbgroups {{ margin:34px 0 6px; padding:16px 18px; background:var(--card); border:1px solid var(--line);
+              border-radius:14px; }}
+  .fbgroups h3 {{ margin:0 0 4px; font-size:14px; }}
+  .fbgroups p {{ margin:0 0 10px; font-size:12.5px; color:var(--muted); }}
+  .fbgroups a {{ display:inline-block; margin:4px 8px 4px 0; font-size:13px; text-decoration:none;
+                color:#1877f2; border:1px solid #1877f2; border-radius:20px; padding:4px 12px; }}
+  .fbgroups a:hover {{ background:#1877f2; color:#fff; }}
 </style></head><body>
 <header>
   <h1>{html.escape(config.DASHBOARD_TITLE)}</h1>
   <div class="sub">Updated {ts}</div>
   <div class="summary">
-    <span><b>{len(listings)}</b> matches</span>
+    <span><b id="visCount">{len(listings)}</b> matches</span>
     <span><b>{new_count}</b> new since last run</span>
-    <span>Budget ≤ CHF {config.BUDGET_CHF:,}</span>
+    <span>Budget pref. CHF {config.BUDGET_CHF:,} · up to {config.STRETCH_MAX_CHF:,} shown</span>
     <span>≥ {config.MIN_PIECES:g} pièces (≈3 bedrooms)</span>
   </div>
+  <div class="controls">
+    <button id="toggleHidden" class="btn" disabled>Show hidden (0)</button>
+    <button id="restoreAll" class="btn" disabled>Restore all</button>
+    <span class="sub" id="hint">Hover a card and click ✕ to hide false positives.</span>
+  </div>
 </header>
-<main>{body}</main>
-<footer>Automated morning watch · sources: Anibis, Homegate, ImmoScout24, Flatfox · new listings ringed in red</footer>
+<main>{body}
+{fb_html}</main>
+<footer>Automated morning watch · sources: Anibis, Homegate, ImmoScout24, Flatfox · new listings ringed in red · hidden listings are stored in this browser only</footer>
+<script>
+(function() {{
+  var KEY = 'geneva-apartments-hidden-v1';
+  function load() {{ try {{ return new Set(JSON.parse(localStorage.getItem(KEY) || '[]')); }} catch (e) {{ return new Set(); }} }}
+  function save(s) {{ try {{ localStorage.setItem(KEY, JSON.stringify(Array.from(s))); }} catch (e) {{}} }}
+  var hidden = load();
+  var showHidden = false;
+  var wraps = Array.prototype.slice.call(document.querySelectorAll('.card-wrap'));
+  var toggleBtn = document.getElementById('toggleHidden');
+  var restoreAllBtn = document.getElementById('restoreAll');
+  var visCount = document.getElementById('visCount');
+
+  function render() {{
+    var hCount = 0, vCount = 0;
+    wraps.forEach(function(w) {{
+      var isH = hidden.has(w.getAttribute('data-uid'));
+      if (isH) hCount++; else vCount++;
+      w.classList.toggle('is-hidden', isH && !showHidden);
+      w.classList.toggle('reveal', isH && showHidden);
+    }});
+    // hide empty area sections
+    document.querySelectorAll('main > h2.area').forEach(function(h) {{
+      var grid = h.nextElementSibling;
+      var anyVisible = grid && Array.prototype.some.call(grid.children, function(c) {{
+        return !c.classList.contains('is-hidden');
+      }});
+      h.style.display = anyVisible ? '' : 'none';
+      if (grid) grid.style.display = anyVisible ? '' : 'none';
+    }});
+    if (visCount) visCount.textContent = vCount;
+    toggleBtn.textContent = (showHidden ? 'Hide hidden (' : 'Show hidden (') + hCount + ')';
+    toggleBtn.disabled = hCount === 0;
+    toggleBtn.classList.toggle('active', showHidden && hCount > 0);
+    restoreAllBtn.disabled = hCount === 0;
+    if (hCount === 0) showHidden = false;
+  }}
+
+  document.addEventListener('click', function(e) {{
+    var wrap = e.target.closest ? e.target.closest('.card-wrap') : null;
+    if (e.target.classList.contains('hidebtn') && wrap) {{
+      e.preventDefault(); hidden.add(wrap.getAttribute('data-uid')); save(hidden); render();
+    }} else if (e.target.classList.contains('restorebtn') && wrap) {{
+      e.preventDefault(); hidden.delete(wrap.getAttribute('data-uid')); save(hidden); render();
+    }}
+  }});
+  toggleBtn.addEventListener('click', function() {{ showHidden = !showHidden; render(); }});
+  restoreAllBtn.addEventListener('click', function() {{ hidden.clear(); save(hidden); showHidden = false; render(); }});
+  render();
+}})();
+</script>
 </body></html>'''

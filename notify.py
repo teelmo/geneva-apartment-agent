@@ -4,6 +4,8 @@ import os
 import smtplib
 from email.mime.text import MIMEText
 
+import config
+
 
 def maybe_email(new_listings, dashboard_url: str = '') -> bool:
   host = os.environ.get('SMTP_HOST')
@@ -25,6 +27,12 @@ def maybe_email(new_listings, dashboard_url: str = '') -> bool:
     lines.append(f'  {l.url}')
   if dashboard_url:
     lines += ['', f'Full dashboard: {dashboard_url}']
+
+  fb = getattr(config, 'FACEBOOK_GROUPS', {}) or {}
+  if fb:
+    lines += ['', 'Facebook groups to skim by hand:']
+    for name, url in fb.items():
+      lines.append(f'  · {name}: {url}')
 
   msg = MIMEText('\n'.join(lines), 'plain', 'utf-8')
   msg['Subject'] = f'🏠 {len(new_listings)} new Geneva apartment(s) — 1205 watch'

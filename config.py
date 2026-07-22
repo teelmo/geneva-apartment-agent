@@ -25,9 +25,10 @@ MAX_SIZE_M2 = 135         # accept a bit bigger too
 # --- Budget -------------------------------------------------------------------
 # Rent here means the "loyer" figure the listing shows. Where a listing clearly
 # separates charges, we try to use rent-incl-charges; otherwise we use what's shown.
-BUDGET_CHF = 3000         # comfortable ceiling
-STRETCH_MAX_CHF = 3600    # above budget but still shown, flagged as "stretch / good catch?"
-# Anything above STRETCH_MAX_CHF is dropped.
+BUDGET_CHF = 3500         # comfortable ceiling (a preference, NOT a hard cut-off)
+STRETCH_MAX_CHF = 4000    # flats CHF 3500–4000 still shown, flagged "stretch / good catch?"
+# Only listings above STRETCH_MAX_CHF are dropped, so CHF 3500 stays a soft
+# preference with real headroom above it (stretch flats are just ranked lower).
 
 # --- Feature bonuses (ranking only, NOT hard filters) -------------------------
 # Detected from listing text. Each present feature nudges a listing up the list.
@@ -52,3 +53,15 @@ REQUEST_TIMEOUT = 30       # seconds
 # The HTML dashboard is always written. Email is optional: it only sends if the
 # SMTP_* environment variables (GitHub Secrets) are set. See README.
 DASHBOARD_TITLE = 'Geneva apartment watch — 1205 first'
+
+# --- Facebook groups (manual check — NOT scraped) -----------------------------
+# We don't automate Facebook (their terms forbid it and it's behind a login), but
+# we surface quick links on the dashboard and in the email so you can skim them by
+# hand in one click. Add/remove groups freely — {name: url}.
+FACEBOOK_GROUPS = {
+  'Apartments Geneva': 'https://www.facebook.com/groups/apartments.geneva',
+  'Genève à louer': 'https://www.facebook.com/groups/genevealouer',
+  'Group 327007357342406': 'https://www.facebook.com/groups/327007357342406',
+  'Group 1889932788416549': 'https://www.facebook.com/groups/1889932788416549',
+  'Group 393414324133485': 'https://www.facebook.com/groups/393414324133485',
+}
