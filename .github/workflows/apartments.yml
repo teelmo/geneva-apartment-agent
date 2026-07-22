@@ -1,0 +1,66 @@
+name: Geneva apartment watch
+
+on:
+  schedule:
+    # 06:30 Geneva time. GitHub cron is UTC, so 04:30 UTC ≈ 06:30 CEST (summer).
+    # In winter (CET) this becomes 05:30 local — adjust the 30 4 below if you care.
+    - cron: '30 4 * * *'
+  workflow_dispatch: {}   # lets you run it manually from the Actions tab
+
+permissions:
+  contents: write   # to commit the updated seen.json
+  pages: write
+  id-token: write
+
+concurrency:
+  group: apartment-watch
+  cancel-in-progress: false
+
+jobs:
+  search:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install dependencies
+        run: |
+          pip install -r requirements.txt
+          python -m playwright install --with-deps chromium
+
+      - name: Run the search
+        env:
+          # Optional email — set these as repo Secrets to enable digests.
+          SMTP_HOST: ${{ secrets.SMTP_HOST }}
+          SMTP_PORT: ${{ secrets.SMTP_PORT }}
+          SMTP_USER: ${{ secrets.SMTP_USER }}
+          SMTP_PASS: ${{ secrets.SMTP_PASS }}
+          SMTP_TO:   ${{ secrets.SMTP_TO }}
+          DASHBOARD_URL: ${{ vars.DASHBOARD_URL }}
+        run: python main.py
+
+      - name: Commit updated seen-store
+        run: |
+          git config user.name  "apartment-bot"
+          git config user.email "bot@users.noreply.github.com"
+          git add seen.json || true
+          git commit -m "Update seen listings ($(date +%F))" || echo "nothing to commit"
+          git push || echo "nothing to push"
+
+      - name: Upload dashboard for Pages
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: public
+
+  deploy:
+    needs: search
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4
