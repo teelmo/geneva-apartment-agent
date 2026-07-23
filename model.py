@@ -57,7 +57,9 @@ _PRICE_RE = re.compile(r"(?:CHF|Fr\.?)\s*(" + _PRICE_AMOUNT + r")", re.IGNORECAS
 _PRICE_RE_ALT = re.compile(r"(" + _PRICE_AMOUNT + r")\.?\s*[-–]?\s*"
                            r"(?:/\s*mois|par\s+mois|CHF|Fr\b)", re.IGNORECASE)
 _PIECES_RE = re.compile(r"([\d]+(?:[.,]5)?)\s*(?:pi[eè]ces?|rooms?|Zimmer|zi\.)", re.IGNORECASE)
-_SIZE_RE = re.compile(r"([\d]{2,3}(?:[.,]\d)?)\s*(?:m2|m²|m\^2)", re.IGNORECASE)
+# immobilier.ch renders the m² sign as separate text nodes ("105 m 2"), so allow
+# an optional space between the "m" and the "2".
+_SIZE_RE = re.compile(r"([\d]{2,3}(?:[.,]\d)?)\s*(?:m\s?2|m²|m\^2)", re.IGNORECASE)
 _POSTCODE_RE = re.compile(r"\b(1[02]\d{2})\b")  # Geneva-ish 4-digit codes (10xx/12xx)
 
 

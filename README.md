@@ -6,7 +6,7 @@ An automated agent that checks Geneva rental portals **every morning**, filters 
 what your family needs, remembers what it has already shown you, and publishes a
 dashboard of only the *new* matches — with **postcode 1205 ranked first**.
 
-Sources: **Anibis, Homegate, ImmoScout24, Flatfox** (the richest ones for
+Sources: **Anibis, Homegate, ImmoScout24, Flatfox, immobilier.ch** (the richest ones for
 *reprise de bail* / lease takeovers).
 
 ---
@@ -104,9 +104,9 @@ python3 main.py --dry     # uses sample.json, exercises filtering + dashboard
 
 ---
 
-## Source status — verified live 2026-07-22
+## Source status — verified live 2026-07-22 (immobilier.ch added 2026-07-23)
 
-All four portals were checked against their live Geneva searches and repaired:
+All five portals were checked against their live Geneva searches and repaired:
 
 | Source | Status | Notes |
 |---|---|---|
@@ -114,6 +114,7 @@ All four portals were checked against their live Geneva searches and repaired:
 | **Homegate** | ✅ verified | 493 Geneva flats; detail URLs `/rent/<id>` match. |
 | **ImmoScout24** | ✅ regex fixed | Now on the Swiss Marketplace Group platform using Homegate's `/rent/<id>` scheme; the old `/d/…` pattern was dead. |
 | **Anibis** | ✅ verified | 697 listings; `/fr/(vi\|s)/…` detail URLs match; lots of *reprise de bail*. |
+| **immobilier.ch** | ✅ added & verified | Server-rendered — no Playwright needed. Search `/fr/louer/appartement/geneve/page-N`; detail URLs `/fr/louer/appartement/geneve/<commune>/<agency>/<title>-<id>`. Since the URL already scopes to canton Geneva, this source skips the generic "must mention Genève/a postcode" text check (communes like Carouge or Onex often show neither in the card text). |
 
 Also hardened along the way:
 - **Swiss price parsing** now handles every real format: `CHF 1,970.–`, `2'950`, `1 680.- par mois`, `Fr. 3200.-`. (The original only parsed the separator-less sample data.)

@@ -50,8 +50,13 @@ def render(url: str, scrolls: int = 4) -> str:
   return html
 
 
-def _extract_cards(html: str, base: str, detail_re: re.Pattern, source: str) -> list[Listing]:
-  """Generic: every detail link + its nearest text block becomes a Listing."""
+def _extract_cards(html: str, base: str, detail_re: re.Pattern, source: str,
+                    require_geneva_text: bool = True) -> list[Listing]:
+  """Generic: every detail link + its nearest text block becomes a Listing.
+  `require_geneva_text` guards against noise on canton-wide searches (e.g.
+  Anibis); skip it when the search URL itself is already Geneva-scoped and the
+  card text may legitimately omit "Genève"/a postcode (e.g. immobilier.ch cards
+  for communes like Carouge or Onex)."""
   soup = BeautifulSoup(html, 'html.parser')
   seen_urls = set()
   out = []
@@ -74,7 +79,7 @@ def _extract_cards(html: str, base: str, detail_re: re.Pattern, source: str) -> 
         break
     text = re.sub(r'\s+', ' ', text)[:600]
     # only keep Geneva-relevant cards to cut noise
-    if 'genè' not in text.lower() and 'genf' not in text.lower() \
+    if require_geneva_text and 'genè' not in text.lower() and 'genf' not in text.lower() \
        and not re.search(r'\b1[02]\d{2}\b', text):
       continue
     seen_urls.add(full)
@@ -238,6 +243,29 @@ def fetch_flatfox() -> list[Listing]:
   return _extract_cards(html, base, detail_re, 'flatfox')
 
 
+# ------------------------------------------------------------------ immobilier.ch
+def fetch_immobilier() -> list[Listing]:
+  """immobilier.ch is server-rendered (no Playwright needed, verified live
+  2026-07). Detail URLs look like
+  /fr/louer/appartement/geneve/<commune>/<agency-slug>/<title>-<id>; the
+  /geneve/ path segment already scopes results to the canton, so — unlike
+  Anibis's canton-wide search — we don't also require "Genève"/a postcode in
+  the card text (communes like Carouge or Onex often show neither)."""
+  base = 'https://www.immobilier.ch'
+  detail_re = re.compile(r'/fr/louer/appartement/geneve/[^/"?]+/[^/"?]+/[^/"?]+-\d{6,}')
+  cards = []
+  for page in range(1, config.MAX_PAGES_PER_SOURCE + 1):
+    url = f'{base}/fr/louer/appartement/geneve/page-{page}'
+    r = requests.get(url, headers={'User-Agent': UA}, timeout=config.REQUEST_TIMEOUT)
+    if r.status_code != 200:
+      break
+    found = _extract_cards(r.text, base, detail_re, 'immobilier', require_geneva_text=False)
+    if not found:
+      break
+    cards.extend(found)
+  return cards
+
+
 def _num(v):
   try:
     return float(str(v).replace("'", '').replace(',', '.')) if v not in (None, '') else None
@@ -251,4 +279,5 @@ ALL_SOURCES = {
   'homegate': fetch_homegate,
   'immoscout': fetch_immoscout,
   'flatfox': fetch_flatfox,
+  'immobilier': fetch_immobilier,
 }

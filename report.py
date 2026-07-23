@@ -6,6 +6,7 @@ import config
 
 _SOURCE_COLORS = {
   'anibis': '#e8562a', 'homegate': '#00a15a', 'immoscout': '#d4145a', 'flatfox': '#2f6df6',
+  'immobilier': '#8e44ad',
 }
 _FEATURE_LABELS = {
   'elevator': 'Lift', 'ground_floor': 'Ground floor', 'outdoor': 'Balcony/terrace',
@@ -149,7 +150,7 @@ def build_html(listings, new_uids: set) -> str:
   .btn:hover {{ border-color:var(--accent); }}
   .btn.active {{ background:var(--accent); color:#fff; border-color:var(--accent); }}
   .btn[disabled] {{ opacity:.4; cursor:default; }}
-  .fbgroups {{ margin:34px 0 6px; padding:16px 18px; background:var(--card); border:1px solid var(--line);
+  .fbgroups {{ margin:0 0 30px; padding:16px 18px; background:var(--card); border:1px solid var(--line);
               border-radius:14px; }}
   .fbgroups h3 {{ margin:0 0 4px; font-size:14px; }}
   .fbgroups p {{ margin:0 0 10px; font-size:12.5px; color:var(--muted); }}
@@ -172,16 +173,19 @@ def build_html(listings, new_uids: set) -> str:
     <span class="sub" id="hint">Hover a card and click ✕ to hide false positives.</span>
   </div>
 </header>
-<main>{body}
-{fb_html}</main>
-<footer>Automated morning watch · sources: Anibis, Homegate, ImmoScout24, Flatfox · new listings ringed in red · hidden listings are stored in this browser only</footer>
+<main>{fb_html}
+{body}</main>
+<footer>Automated morning watch · sources: Anibis, Homegate, ImmoScout24, Flatfox, immobilier.ch · new listings ringed in red · hidden listings are stored in this browser only</footer>
 <script>
 (function() {{
   var KEY = 'geneva-apartments-hidden-v1';
+  var SHOW_KEY = 'geneva-apartments-showhidden-v1';
   function load() {{ try {{ return new Set(JSON.parse(localStorage.getItem(KEY) || '[]')); }} catch (e) {{ return new Set(); }} }}
   function save(s) {{ try {{ localStorage.setItem(KEY, JSON.stringify(Array.from(s))); }} catch (e) {{}} }}
+  function loadShow() {{ try {{ return localStorage.getItem(SHOW_KEY) === '1'; }} catch (e) {{ return false; }} }}
+  function saveShow(v) {{ try {{ localStorage.setItem(SHOW_KEY, v ? '1' : '0'); }} catch (e) {{}} }}
   var hidden = load();
-  var showHidden = false;
+  var showHidden = loadShow();
   var wraps = Array.prototype.slice.call(document.querySelectorAll('.card-wrap'));
   var toggleBtn = document.getElementById('toggleHidden');
   var restoreAllBtn = document.getElementById('restoreAll');
@@ -209,7 +213,7 @@ def build_html(listings, new_uids: set) -> str:
     toggleBtn.disabled = hCount === 0;
     toggleBtn.classList.toggle('active', showHidden && hCount > 0);
     restoreAllBtn.disabled = hCount === 0;
-    if (hCount === 0) showHidden = false;
+    if (hCount === 0 && showHidden) {{ showHidden = false; saveShow(showHidden); }}
   }}
 
   document.addEventListener('click', function(e) {{
@@ -220,8 +224,8 @@ def build_html(listings, new_uids: set) -> str:
       e.preventDefault(); hidden.delete(wrap.getAttribute('data-uid')); save(hidden); render();
     }}
   }});
-  toggleBtn.addEventListener('click', function() {{ showHidden = !showHidden; render(); }});
-  restoreAllBtn.addEventListener('click', function() {{ hidden.clear(); save(hidden); showHidden = false; render(); }});
+  toggleBtn.addEventListener('click', function() {{ showHidden = !showHidden; saveShow(showHidden); render(); }});
+  restoreAllBtn.addEventListener('click', function() {{ hidden.clear(); save(hidden); showHidden = false; saveShow(showHidden); render(); }});
   render();
 }})();
 </script>
