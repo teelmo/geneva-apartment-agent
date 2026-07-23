@@ -1,5 +1,7 @@
 # Geneva apartment watch 🏠
 
+**[View the live dashboard](https://teelmo.github.io/geneva-apartment-agent/)**
+
 An automated agent that checks Geneva rental portals **every morning**, filters for
 what your family needs, remembers what it has already shown you, and publishes a
 dashboard of only the *new* matches — with **postcode 1205 ranked first**.
