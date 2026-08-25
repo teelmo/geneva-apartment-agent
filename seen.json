@@ -2403,5 +2403,45 @@
 "first_seen": "2026-08-24",
 "url": "https://www.immobilier.ch/fr/louer/appartement/geneve/russin/jade-mounier-immobilier-3104/appartement-terrasse-5-pieces-1555131",
 "price": 3480.0
+},
+"8a6261b1e94db6e4": {
+"first_seen": "2026-08-25",
+"url": "https://flatfox.ch/en/flat/rue-du-jura-17-1201-geneve/86301031/",
+"price": 2600.0
+},
+"97075a0c0177c6e4": {
+"first_seen": "2026-08-25",
+"url": "https://flatfox.ch/en/flat/rue-tronchin-1202-genf/86299315/",
+"price": 2860.0
+},
+"b97cbaddec6cdfa0": {
+"first_seen": "2026-08-25",
+"url": "https://flatfox.ch/en/flat/1202-genf/86303421/",
+"price": null
+},
+"26b13933109d4ef7": {
+"first_seen": "2026-08-25",
+"url": "https://flatfox.ch/en/flat/route-des-molards-1281-russin/86299197/",
+"price": 3480.0
+},
+"d47975111b387d1e": {
+"first_seen": "2026-08-25",
+"url": "https://flatfox.ch/en/flat/1281-russin/86299516/",
+"price": 3480.0
+},
+"ee19a6c61c15d397": {
+"first_seen": "2026-08-25",
+"url": "https://www.immobilier.ch/fr/louer/appartement/geneve/versoix/grange-immobilier-34/appartement-55-piece-spacieux-versoix-1559635",
+"price": 2600.0
+},
+"03fe1a210e8f4962": {
+"first_seen": "2026-08-25",
+"url": "https://www.immobilier.ch/fr/louer/appartement/geneve/lignon/comptoir-immobilier-geneve-29/appartement-entierement-renove-situe-environnement-verdoyant-pro-1559428",
+"price": 1550.0
+},
+"411606d0357a90c2": {
+"first_seen": "2026-08-25",
+"url": "https://www.immobilier.ch/fr/louer/appartement/geneve/geneve/hlp-homeloc-prestige-2282/charmant-45-pieces-proche-parc-geisendorf-1558921",
+"price": 3350.0
 }
 }
