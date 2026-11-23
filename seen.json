@@ -1,54 +1,4 @@
 {
-"f637158fb7b650d9": {
-"first_seen": "2026-07-26",
-"url": "https://www.immobilier.ch/fr/louer/appartement/geneve/geneve/grange-immobilier-34/rue-eaux-vives-106-1542804",
-"price": 2600.0
-},
-"b44839e6292d640c": {
-"first_seen": "2026-07-26",
-"url": "https://flatfox.ch/en/flat/1225-chene-bourg/86218614/",
-"price": 3370.0
-},
-"651034dacd332d65": {
-"first_seen": "2026-07-26",
-"url": "https://flatfox.ch/en/flat/chemin-de-pinchat-1227-les-acacias/86218332/",
-"price": 3900.0
-},
-"ce086d3c324bd121": {
-"first_seen": "2026-07-26",
-"url": "https://www.immobilier.ch/fr/louer/appartement/geneve/grand-saconnex/nsr-group-1607/louer-bel-appartement-4-pieces-grand-saconnex-1542256",
-"price": 1800.0
-},
-"06cff47217a50ae6": {
-"first_seen": "2026-07-26",
-"url": "https://www.immobilier.ch/fr/louer/appartement/geneve/geneve/immo-trading-717/carouge-appartement-4-pieces-95-1540061",
-"price": 2800.0
-},
-"dd0d6b67749e3158": {
-"first_seen": "2026-07-26",
-"url": "https://www.immobilier.ch/fr/louer/appartement/geneve/meyrin/moser-vernet-cie-location-gerance-352/meyrin-avenue-vaudagne-76-81m2-1541218",
-"price": 2400.0
-},
-"579bda8a03c7d04a": {
-"first_seen": "2026-07-26",
-"url": "https://www.immobilier.ch/fr/louer/appartement/geneve/chatelaine/naef-immobilier-geneve-location-ppe-siege-40/louer-appartement-4-pieces-3eme-etage-1540480",
-"price": 2400.0
-},
-"76348a5d0fede4ef": {
-"first_seen": "2026-07-26",
-"url": "https://www.immobilier.ch/fr/louer/appartement/geneve/les-acacias/allianz-suisse-immobilier-bussigny-677/appartement-4-pieces-aux-acacias-1541306",
-"price": 2250.0
-},
-"537356001680bcfc": {
-"first_seen": "2026-07-26",
-"url": "https://www.immobilier.ch/fr/louer/appartement/geneve/petit-lancy/gerofinance-regie-rhone-geneve-44/charmant-appartement-45-pieces-4eme-etage-grand-balcon-1540198",
-"price": 2289.0
-},
-"dfe81fefd3a6d12d": {
-"first_seen": "2026-07-26",
-"url": "https://www.immobilier.ch/fr/louer/appartement/geneve/carouge-ge/spg-locations-generales-490/appartement-carouge-1542291",
-"price": 3200.0
-},
 "fa09a5fe14065dff": {
 "first_seen": "2026-07-27",
 "url": "https://www.immobilier.ch/fr/louer/appartement/geneve/geneve/privalia-immobilier-586/magnifique-appartement-proximite-place-augustins-1541662",
@@ -7553,5 +7503,75 @@
 "first_seen": "2026-11-22",
 "url": "https://www.immobilier.ch/fr/louer/appartement/geneve/veyrier/home-location-1878/new-construction-stunning-45-room-apartment-in-veyrier-with-large-balcony-1616804",
 "price": 3800.0
+},
+"5f02600a6b9fce76": {
+"first_seen": "2026-11-23",
+"url": "https://flatfox.ch/en/flat/1202-geneve/86567819/",
+"price": 2152.0
+},
+"2174ce43d23231ca": {
+"first_seen": "2026-11-23",
+"url": "https://www.immobilier.ch/fr/louer/appartement/geneve/geneve/am-properties-2726/magnifique-appartement-familial-standing-1618504",
+"price": 4000.0
+},
+"914ef9a7c7b01540": {
+"first_seen": "2026-11-23",
+"url": "https://flatfox.ch/en/flat/promenade-de-la-dentelliere-16-1217-meyrin/86514337/",
+"price": 3430.0
+},
+"6b813f4a8258bc01": {
+"first_seen": "2026-11-23",
+"url": "https://flatfox.ch/en/flat/chemin-du-foron-7-1226-thonex/86567439/",
+"price": 2043.0
+},
+"4000a3ec8690534f": {
+"first_seen": "2026-11-23",
+"url": "https://flatfox.ch/en/flat/chemin-de-pre-puits-15-b-1246-corsier-ge/86568134/",
+"price": 3000.0
+},
+"da5998ae1f54206c": {
+"first_seen": "2026-11-23",
+"url": "https://flatfox.ch/en/flat/chemin-des-marais-59a-1255-veyrier/86568135/",
+"price": 3800.0
+},
+"66357afcff41f5ff": {
+"first_seen": "2026-11-23",
+"url": "https://www.immobilier.ch/fr/louer/appartement/geneve/versoix/spg-locations-residentielles-491/magnifique-appartement-versoix-1615476",
+"price": 3010.0
+},
+"274999ce73ff6e24": {
+"first_seen": "2026-11-23",
+"url": "https://www.immobilier.ch/fr/louer/appartement/geneve/thonex/room-estate-1443/chambre-colocation-thonex-tram-pied-immeuble-lac-15-minutes-1616104",
+"price": 3010.0
+},
+"3895737d89cf683c": {
+"first_seen": "2026-11-23",
+"url": "https://www.immobilier.ch/fr/louer/appartement/geneve/thonex/spg-locations-generales-490/appartement-agreable-thonex-1618733",
+"price": 2043.0
+},
+"370b6e52ad92e070": {
+"first_seen": "2026-11-23",
+"url": "https://www.immobilier.ch/fr/louer/appartement/geneve/petit-lancy/naef-immobilier-geneve-location-ppe-siege-40/joli-appartement-4-pieces-recemment-renove-1617407",
+"price": 2200.0
+},
+"d05ab5e41db337b6": {
+"first_seen": "2026-11-23",
+"url": "https://www.immobilier.ch/fr/louer/appartement/geneve/meyrin/apleona-schweiz-ag-670/bel-appartement-4-pieces-1614978",
+"price": 2340.0
+},
+"7f0e7c8df376aabe": {
+"first_seen": "2026-11-23",
+"url": "https://www.immobilier.ch/fr/louer/appartement/geneve/geneve/naef-immobilier-geneve-location-ppe-siege-40/appartement-1618780",
+"price": 3375.0
+},
+"e70ba9dd4e75b1da": {
+"first_seen": "2026-11-23",
+"url": "https://www.immobilier.ch/fr/louer/appartement/geneve/geneve/regie-centre-366/appartement-neuf-4-pieces-servette-1615433",
+"price": 2500.0
+},
+"95b5b7c3da2231de": {
+"first_seen": "2026-11-23",
+"url": "https://www.immobilier.ch/fr/louer/appartement/geneve/geneve/for-u-relocation-sarl-810/champel-superbe-4p-lumineux-1618448",
+"price": 3600.0
 }
 }
