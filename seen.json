@@ -1,29 +1,4 @@
 {
-"fa09a5fe14065dff": {
-"first_seen": "2026-07-27",
-"url": "https://www.immobilier.ch/fr/louer/appartement/geneve/geneve/privalia-immobilier-586/magnifique-appartement-proximite-place-augustins-1541662",
-"price": 4000.0
-},
-"859b598e84d243a9": {
-"first_seen": "2026-07-27",
-"url": "https://www.immobilier.ch/fr/louer/appartement/geneve/meinier/pilet-renaud-locations-443/tres-bel-appartement-situe-campagne-genevoise-calme-1543389",
-"price": 2200.0
-},
-"c61a80a0138fb489": {
-"first_seen": "2026-07-27",
-"url": "https://www.immobilier.ch/fr/louer/appartement/geneve/geneve/comptoir-immobilier-geneve-29/bel-appartement-45-pieces-balcons-plainpalais-1541725",
-"price": 2320.0
-},
-"9c4c9a32d5b5138d": {
-"first_seen": "2026-07-27",
-"url": "https://www.immobilier.ch/fr/louer/appartement/geneve/geneve/regimo-lausanne-865/beaucoup-espace-vie-familiale-1542396",
-"price": 2750.0
-},
-"963c57dc7cb0c8ef": {
-"first_seen": "2026-07-27",
-"url": "https://www.immobilier.ch/fr/louer/appartement/geneve/confignon/naef-immobilier-nyon-342/beau-duplex-4-pieces-1er-etage-balcon-env-81m2-1540879",
-"price": 2950.0
-},
 "2c7ab1b8b708de05": {
 "first_seen": "2026-07-28",
 "url": "https://flatfox.ch/en/flat/avenue-calas-16-1206-geneve/86221486/",
@@ -7573,5 +7548,110 @@
 "first_seen": "2026-11-23",
 "url": "https://www.immobilier.ch/fr/louer/appartement/geneve/geneve/for-u-relocation-sarl-810/champel-superbe-4p-lumineux-1618448",
 "price": 3600.0
+},
+"b1f4d17dd95bc063": {
+"first_seen": "2026-11-24",
+"url": "https://flatfox.ch/en/flat/rue-des-photographes-3-1207-geneve/86575800/",
+"price": 2690.0
+},
+"e281413a6fc37490": {
+"first_seen": "2026-11-24",
+"url": "https://www.immobilier.ch/fr/louer/appartement/geneve/geneve/alvyra-estates-1685/eaux-vives-appartement-attique-4-pieces-env100-m-5e-etage-1618667",
+"price": 3400.0
+},
+"566b328a6f296baf": {
+"first_seen": "2026-11-24",
+"url": "https://www.immobilier.ch/fr/louer/appartement/geneve/geneve/n20-immobilier-sarl-2874/charmant-5-pieces-petit-saconnex-1619062",
+"price": 4000.0
+},
+"a9dc6bd87d9fd032": {
+"first_seen": "2026-11-24",
+"url": "https://www.immobilier.ch/fr/louer/appartement/geneve/geneve/n20-immobilier-sarl-2874/appartement-charme-cur-eaux-vives-1619476",
+"price": 3200.0
+},
+"5844751d13ceeedf": {
+"first_seen": "2026-11-24",
+"url": "https://flatfox.ch/en/flat/route-des-ravieres-8-1258-perly/86568646/",
+"price": 2160.0
+},
+"37a5ad896ebd5df1": {
+"first_seen": "2026-11-24",
+"url": "https://flatfox.ch/en/flat/rue-caroline-24-1227-les-acacias/86576993/",
+"price": 2806.0
+},
+"ec9d62768b94b0ea": {
+"first_seen": "2026-11-24",
+"url": "https://flatfox.ch/en/flat/chemin-de-largiliere-2-4-1234-vessy/86575910/",
+"price": 2750.0
+},
+"1635e4cd0523d0c7": {
+"first_seen": "2026-11-24",
+"url": "https://www.immobilier.ch/fr/louer/appartement/geneve/geneve/am-properties-2726/magnifique-appartement-6-pieces-renove-terrasse-geneve-1618492",
+"price": 3375.0
+},
+"ab6c3f12967a683a": {
+"first_seen": "2026-11-24",
+"url": "https://www.immobilier.ch/fr/louer/appartement/geneve/geneve/am-properties-2726/eaux-vives-appartement-4-pieces-vue-degagee-jura-1618490",
+"price": 3375.0
+},
+"db70c2ae1b56ee12": {
+"first_seen": "2026-11-24",
+"url": "https://flatfox.ch/en/flat/route-de-jussy-60-1226-thonex/86568576/",
+"price": 2980.0
+},
+"67e488358849705c": {
+"first_seen": "2026-11-24",
+"url": "https://flatfox.ch/en/flat/route-de-jussy-60-1226-thonex/86568581/",
+"price": 3180.0
+},
+"49061fc417919ffc": {
+"first_seen": "2026-11-24",
+"url": "https://flatfox.ch/en/flat/route-de-jussy-60-1226-thonex/86568583/",
+"price": 3180.0
+},
+"d041ef5cd1ed49cf": {
+"first_seen": "2026-11-24",
+"url": "https://www.immobilier.ch/fr/louer/appartement/geneve/petit-lancy/lands-immobilier-sarl-705/spacieux-appartement-sous-louer-1617272",
+"price": 2900.0
+},
+"3bf419aba45b0bc2": {
+"first_seen": "2026-11-24",
+"url": "https://www.immobilier.ch/fr/louer/appartement/geneve/grand-lancy/zimmermann-immobilier-772/appartement4586-1618111",
+"price": 2300.0
+},
+"64a2ec8ada528401": {
+"first_seen": "2026-11-24",
+"url": "https://www.immobilier.ch/fr/louer/appartement/geneve/geneve/bordier-schmidhauser-402/rue-monthoux-36-appartement-5-pieces-1618624",
+"price": 2850.0
+},
+"bf7614d130063598": {
+"first_seen": "2026-11-24",
+"url": "https://www.immobilier.ch/fr/louer/appartement/geneve/geneve/apleona-schweiz-ag-670/appartement-traversant-quartier-tourelle-1616034",
+"price": 2850.0
+},
+"96dafb1fa37af96b": {
+"first_seen": "2026-11-24",
+"url": "https://www.immobilier.ch/fr/louer/appartement/geneve/geneve/yema-properties-sarl-2764/bel-appartement-5-pieces-parfaitement-situe-1615661",
+"price": 3500.0
+},
+"6487cb1b8faadd09": {
+"first_seen": "2026-11-24",
+"url": "https://www.immobilier.ch/fr/louer/appartement/geneve/geneve/moser-vernet-cie-locations-residentielles-592/bel-appartement-traversant-1618695",
+"price": 3300.0
+},
+"7482c7d66421b227": {
+"first_seen": "2026-11-24",
+"url": "https://www.immobilier.ch/fr/louer/appartement/geneve/geneve/gerofinance-siege-location-2216/charmant-appartement-attique-coeur-eaux-vives-1619444",
+"price": 3500.0
+},
+"163170f0bd00ed2d": {
+"first_seen": "2026-11-24",
+"url": "https://www.immobilier.ch/fr/louer/appartement/geneve/geneve/livit-ag-real-estate-management-675/superbe-appartement-immeuble-standing-1619409",
+"price": 4000.0
+},
+"274fbab5e1a1c6dd": {
+"first_seen": "2026-11-24",
+"url": "https://www.immobilier.ch/fr/louer/appartement/geneve/thonex/fidys-group-immobilier-651/appartement-traversant-4-pieces-terrasse-56m2-thonex-1618014",
+"price": 3520.0
 }
 }
